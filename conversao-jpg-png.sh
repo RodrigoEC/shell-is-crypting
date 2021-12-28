@@ -1,5 +1,10 @@
+# INterpreter that's going to be used
 #!/bin/bash
 
-CAMINHO_IMAGENS=~/Downloads/imagens-livros
+IMAGES_PATH=~/Downloads/imagens-livros
 
-convert $CAMINHO_IMAGENS/$1.jpg $CAMINHO_IMAGENS/$1.png
+# Get all parameters passed with $@
+for image in $@
+do
+    convert $IMAGES_PATH/$image.jpg $IMAGES_PATH/$image-converted.png
+done
