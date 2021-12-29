@@ -1,10 +1,17 @@
 # INterpreter that's going to be used
 #!/bin/bash
 
-IMAGES_PATH=~/Downloads/imagens-livros
+cd ~/Downloads/imagens-livros
+
+if [ ! -d  converted ]
+then
+    mkdir converted
+fi
+
 
 # Get all parameters passed with $@
-for image in $@
-do
-    convert $IMAGES_PATH/$image.jpg $IMAGES_PATH/$image-converted.png
+for image in *.jpg
+do  
+    file_name=$(ls $image | awk -F. '{ print$1 }')
+    convert $image converted/$file_name.png
 done
