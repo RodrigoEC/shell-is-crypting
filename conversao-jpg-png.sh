@@ -2,10 +2,13 @@
 #!/bin/bash
 
 convert_images() {
-    cd ~/Downloads/imagens-livro
+    cd ~/Downloads/imagens-livros
 
     if [ ! -d  converted ]
     then
+        mkdir converted
+    else 
+        rm -rf converted
         mkdir converted
     fi
 
