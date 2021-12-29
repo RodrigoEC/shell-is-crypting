@@ -1,17 +1,28 @@
 # INterpreter that's going to be used
 #!/bin/bash
 
-cd ~/Downloads/imagens-livros
+convert_images() {
+    cd ~/Downloads/imagens-livro
 
-if [ ! -d  converted ]
+    if [ ! -d  converted ]
+    then
+        mkdir converted
+    fi
+
+
+    # Get all parameters passed with $@
+    for image in *.jpg
+    do  
+        # This variable is only acessable in the scope of the function
+        local file_name=$(ls $image | awk -F. '{ print$1 }')
+        convert $image converted/$file_name.png
+    done
+}
+
+convert_images 2>erros_conversao.txt
+if [ $? -eq 0 ]
 then
-    mkdir converted
+    echo "Conversão realizada com sucesso!"
+else
+    echo "Houve uma falha no processo!"
 fi
-
-
-# Get all parameters passed with $@
-for image in *.jpg
-do  
-    file_name=$(ls $image | awk -F. '{ print$1 }')
-    convert $image converted/$file_name.png
-done
